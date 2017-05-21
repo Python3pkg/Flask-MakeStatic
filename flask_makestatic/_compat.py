@@ -14,12 +14,12 @@ PY2 = sys.version_info[0] == 2
 
 if PY2:
     def iteritems(d):
-        return d.iteritems()
+        return iter(d.items())
 
-    from cStringIO import StringIO
+    from io import StringIO
 else:
     def iteritems(d):
-        return d.items()
+        return list(d.items())
 
     from io import StringIO
 

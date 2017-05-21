@@ -31,7 +31,7 @@ def repeatfunc(func):
 
 
 def unzip(zipped):
-    return map(list, zip(*zipped))
+    return list(map(list, list(zip(*zipped))))
 
 
 def new_app_context(f_or_app, appctx=None):
@@ -229,18 +229,18 @@ class MakeStatic(object):
         @watcher.file_added.connect
         @new_app_context(self._get_app())
         def on_file_added(filename):
-            print(
-                u'Flask-MakeStatic: detected new asset %s, compiling' %
+            print((
+                'Flask-MakeStatic: detected new asset %s, compiling' %
                 os.path.relpath(filename, self.assets_folder)
-            )
+            ))
             self.compile_asset(filename)
         @watcher.file_modified.connect
         @new_app_context(self._get_app())
         def on_file_modified(filename):
-            print(
-                u'Flask-MakeStatic: detected change in %s, compiling' %
+            print((
+                'Flask-MakeStatic: detected change in %s, compiling' %
                 os.path.relpath(filename, self.assets_folder)
-            )
+            ))
             self.compile_asset(filename)
         watcher.add_directory(self.assets_folder)
         watcher.watch(sleep=sleep)
